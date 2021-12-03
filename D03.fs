@@ -11,7 +11,7 @@ let BitMax (xs:int list) : int = List.max xs |> float |> Math.Log2 |> Math.Floor
 
 type Grouping<'key,'item> = 'key * 'item list
 type Sort<'a> = (Grouping<'a,'a> -> int) -> Grouping<'a,'a> list -> Grouping<'a,'a> list
-let CommonItem (sort:'a Sort) : xs: 'a list -> 'a*int =
+let CommonItem (sort:'a Sort) : 'a list -> 'a*int =
   List.groupBy id
   >> sort (fun (_,l) -> List.length l)
   >> List.head

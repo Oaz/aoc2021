@@ -28,5 +28,13 @@ let inputForDay (day: int) : string =
   getAsync httpClient $"https://adventofcode.com/2021/day/{day}/input"
   |> Async.RunSynchronously
 
-let splitLines (input: string) : string list =
-  input.Trim().Split([| '\n' |]) |> Array.toList
+let splitOnSpaces (input: string) : string list =
+  Array.toList (input.Split(" ",StringSplitOptions.RemoveEmptyEntries+StringSplitOptions.TrimEntries))
+let splitOnChar (sep:char) (input: string) : string list =
+  input.Trim().Split([| sep |]) |> Array.toList
+let splitLines = splitOnChar '\n'
+let splitOnComma = splitOnChar ','
+
+let generate (f:'a -> 'a) : 'a -> 'a seq = Seq.unfold (fun x -> let y = f x in Some (y,y))
+let addOption (f: 'a -> 'b option) (t:'a) : ('a*'b) option = Option.bind (fun x -> Some (t,x)) (f t)
+let flip f a b = f b a

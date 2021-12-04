@@ -1,8 +1,8 @@
 module aoc2021.D03
 
 open System
+open Tools
 
-let flip f a b = f b a
 let ReadBinary x = Convert.ToInt32(x, 2)
 let ReadBinaries xs = List.map ReadBinary xs
 let GetBit n x = (x >>> n) &&& 1

@@ -17,6 +17,8 @@
         <Compile Include="D03T.fs" />
         <Compile Include="D04.fs" />
         <Compile Include="D04T.fs" />
+        <Compile Include="D05.fs" />
+        <Compile Include="D05T.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 

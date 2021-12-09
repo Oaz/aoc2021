@@ -36,5 +36,6 @@ let splitLines = splitOnChar '\n'
 let splitOnComma = splitOnChar ','
 
 let generate (f:'a -> 'a) : 'a -> 'a seq = Seq.unfold (fun x -> let y = f x in Some (y,y))
+let rollUntil (f:'a*'a -> bool) : 'a seq -> 'a = fst << Seq.head << Seq.skipWhile (f >> not) << Seq.pairwise
 let addOption (f: 'a -> 'b option) (t:'a) : ('a*'b) option = Option.bind (fun x -> Some (t,x)) (f t)
 let flip f a b = f b a

@@ -9,6 +9,7 @@
 
     <ItemGroup>
         <Compile Include="Tools.fs" />
+        <Compile Include="Stack.fs" />
         <Compile Include="D01.fs" />
         <Compile Include="D01T.fs" />
         <Compile Include="D02.fs" />
@@ -27,6 +28,8 @@
         <Compile Include="D08T.fs" />
         <Compile Include="D09.fs" />
         <Compile Include="D09T.fs" />
+        <Compile Include="D10.fs" />
+        <Compile Include="D10T.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 

@@ -1,8 +1,5 @@
 module aoc2021.Program
 
 [<EntryPoint>]
-let main _ =
-  printfn "Hello"
-  let input = Tools.inputForDay 1
-  printfn $"{input}"
-  0
+let main args =
+  aoc2021.WebApp.Program.Main args

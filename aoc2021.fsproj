@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net5.0</TargetFramework>
 
         <IsPackable>false</IsPackable>
         <GenerateProgramFile>false</GenerateProgramFile>
@@ -32,6 +32,11 @@
         <Compile Include="D10T.fs" />
         <Compile Include="D11.fs" />
         <Compile Include="D11T.fs" />
+        <Compile Include="WebApp\Component.fs" />
+        <Compile Include="WebApp\D11.fs" />
+        <Compile Include="WebApp\RoutingMenu.fs" />
+        <Compile Include="WebApp\Main.fs" />
+        <Compile Include="WebApp\Startup.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 
@@ -40,6 +45,9 @@
         <PackageReference Include="NUnit" Version="3.13.2" />
         <PackageReference Include="NUnit3TestAdapter" Version="4.0.0" />
         <PackageReference Include="coverlet.collector" Version="3.1.0" />
+        <PackageReference Include="Bolero" Version="0.*" />
+        <PackageReference Include="Bolero.Build" Version="0.*" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.*" />
     </ItemGroup>
 
 </Project>

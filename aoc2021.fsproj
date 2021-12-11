@@ -30,6 +30,8 @@
         <Compile Include="D09T.fs" />
         <Compile Include="D10.fs" />
         <Compile Include="D10T.fs" />
+        <Compile Include="D11.fs" />
+        <Compile Include="D11T.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 

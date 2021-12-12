@@ -1,4 +1,4 @@
-module aoc2021.D01
+module aoc2021.Core.D01
 
 let allButLast (n: int) (l: 'a list) : 'a list = List.take (List.length l - n) l
 

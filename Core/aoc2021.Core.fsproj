@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
@@ -10,6 +10,7 @@
     <ItemGroup>
         <Compile Include="Tools.fs" />
         <Compile Include="Stack.fs" />
+        <Compile Include="Graph.fs" />
         <Compile Include="D01.fs" />
         <Compile Include="D01T.fs" />
         <Compile Include="D02.fs" />
@@ -32,11 +33,8 @@
         <Compile Include="D10T.fs" />
         <Compile Include="D11.fs" />
         <Compile Include="D11T.fs" />
-        <Compile Include="WebApp\Component.fs" />
-        <Compile Include="WebApp\D11.fs" />
-        <Compile Include="WebApp\RoutingMenu.fs" />
-        <Compile Include="WebApp\Main.fs" />
-        <Compile Include="WebApp\Startup.fs" />
+        <Compile Include="D12.fs" />
+        <Compile Include="D12T.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 
@@ -45,9 +43,6 @@
         <PackageReference Include="NUnit" Version="3.13.2" />
         <PackageReference Include="NUnit3TestAdapter" Version="4.0.0" />
         <PackageReference Include="coverlet.collector" Version="3.1.0" />
-        <PackageReference Include="Bolero" Version="0.*" />
-        <PackageReference Include="Bolero.Build" Version="0.*" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.*" />
     </ItemGroup>
 
 </Project>

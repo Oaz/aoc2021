@@ -13,7 +13,7 @@ type Page =
 /// The Elmish application's model.
 type Model =
   { menu: RoutingMenu.Model<Page>
-    counter: D11.Model }
+    d11: D11.Model }
 
 /// The Elmish application's update messages.
 type Message =
@@ -28,7 +28,7 @@ let messageRouting (message: Message) : Message list = []
 
 let d11 =
   D11.MakeComponent<Model, Message>(
-    ModelWrapper((fun gm lm -> { gm with counter = lm }), (fun m -> m.counter)),
+    ModelWrapper((fun gm lm -> { gm with d11 = lm }), (fun m -> m.d11)),
     MessageWrapper(
       D11Message,
       (fun msg ->
@@ -56,7 +56,7 @@ let menu =
 
 let initModel =
   { menu = menu.InitialModel
-    counter = d11.InitialModel }
+    d11 = d11.InitialModel }
 
 let update (message: Message) : Services -> Message -> Model -> Model * Cmd<Message> =
   match message with

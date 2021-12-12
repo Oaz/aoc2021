@@ -1,4 +1,4 @@
-module aoc2021.Stack
+module aoc2021.Core.Stack
 
 type Stack<'t> =
   | Empty

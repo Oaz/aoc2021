@@ -1,4 +1,4 @@
-module aoc2021.D09
+module aoc2021.Core.D09
 
 open Tools
 

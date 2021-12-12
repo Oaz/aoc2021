@@ -7,6 +7,7 @@ open System.Net.Http
 
 module Program =
 
+    [<EntryPoint>]
     let Main args =
         let builder = WebAssemblyHostBuilder.CreateDefault(args)
         builder.RootComponents.Add<Main.MyApp>("#main")

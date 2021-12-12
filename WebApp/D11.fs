@@ -4,8 +4,8 @@ open Bolero
 open Elmish
 open Bolero.Html
 open Component
-open aoc2021.Tools
-open aoc2021.D11
+open aoc2021.Core.Tools
+open aoc2021.Core.D11
 
 type Model =
   { puzzleInput: string
@@ -20,6 +20,7 @@ type Message =
   | Load
   | Start
   | Stop
+  | Step
   | Tick
   | Tock
 
@@ -66,6 +67,7 @@ type MakeComponent<'globalModel, 'globalMessage>
       Cmd.none
     | Start -> { model with running = true }, Cmd.ofMsg Tock
     | Stop -> { model with running = false }, Cmd.none
+    | Step -> { model with running = false }, Cmd.ofMsg Tick
     | Tick ->
       match model.frame with
       | Some frame ->
@@ -126,6 +128,10 @@ type MakeComponent<'globalModel, 'globalMessage>
                button [ on.click (fun _ -> dispatch Stop)
                         attr.``class`` "button" ] [
                  text "STOP"
+               ]
+               button [ on.click (fun _ -> dispatch Step)
+                        attr.``class`` "button" ] [
+                 text "STEP"
                ]
                input [ attr.``type`` "number"
                        attr.id "interval"

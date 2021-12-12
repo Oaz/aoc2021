@@ -1,7 +1,7 @@
-module aoc2021.D10T
+module aoc2021.Core.D10T
 
 open NUnit.Framework
-open aoc2021.D10
+open D10
 open Tools
 open System
 

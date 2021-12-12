@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Include="Component.fs" />
+        <Compile Include="D11.fs" />
+        <Compile Include="RoutingMenu.fs" />
+        <Compile Include="Main.fs" />
+        <Compile Include="Startup.fs" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Bolero" Version="0.*" />
+        <PackageReference Include="Bolero.Build" Version="0.*" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.*" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Core\aoc2021.Core.fsproj" />
+    </ItemGroup>
+
+</Project>

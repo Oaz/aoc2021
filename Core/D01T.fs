@@ -1,8 +1,7 @@
-module aoc2021.D01T
+module aoc2021.Core.D01T
 
 open System
 open NUnit.Framework
-open aoc2021
 
 [<SetUp>]
 let Setup () = ()

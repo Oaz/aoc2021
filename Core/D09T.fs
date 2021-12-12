@@ -1,7 +1,7 @@
-module aoc2021.D09T
+module aoc2021.Core.D09T
 
 open NUnit.Framework
-open aoc2021.D09
+open D09
 open Tools
 
 [<SetUp>]

@@ -1,7 +1,7 @@
-module aoc2021.D10
+module aoc2021.Core.D10
 
 open System
-open aoc2021.Stack
+open Stack
 
 type Bracket =
   | Round

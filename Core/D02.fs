@@ -1,4 +1,4 @@
-module aoc2021.D02
+module aoc2021.Core.D02
 
 open System
 

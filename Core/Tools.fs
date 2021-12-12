@@ -1,4 +1,4 @@
-module aoc2021.Tools
+module aoc2021.Core.Tools
 
 open System
 open System.Net

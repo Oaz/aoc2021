@@ -1,7 +1,7 @@
-module aoc2021.D11T
+module aoc2021.Core.D11T
 
 open NUnit.Framework
-open aoc2021.D11
+open D11
 open Tools
 
 let cavern0 =

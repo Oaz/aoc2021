@@ -26,46 +26,46 @@ let TestExample () =
                   [ 8; 7; 6; 7; 8; 9; 6; 7; 8; 9 ]
                   [ 9; 8; 9; 9; 9; 6; 5; 6; 7; 8 ] ]
       LowPoints =
-        [ { X = 1; Y = 0 }
-          { X = 9; Y = 0 }
-          { X = 2; Y = 2 }
-          { X = 6; Y = 4 } ]
+        [ Position(1,0)
+          Position(9,0)
+          Position(2,2)
+          Position(6,4) ]
       Basins =
-        [ set [ { X = 0; Y = 0 }
-                { X = 0; Y = 1 }
-                { X = 1; Y = 0 } ]
-          set [ { X = 5; Y = 0 }
-                { X = 6; Y = 0 }
-                { X = 6; Y = 1 }
-                { X = 7; Y = 0 }
-                { X = 8; Y = 0 }
-                { X = 8; Y = 1 }
-                { X = 9; Y = 0 }
-                { X = 9; Y = 1 }
-                { X = 9; Y = 2 } ]
-          set [ { X = 0; Y = 3 }
-                { X = 1; Y = 2 }
-                { X = 1; Y = 3 }
-                { X = 1; Y = 4 }
-                { X = 2; Y = 1 }
-                { X = 2; Y = 2 }
-                { X = 2; Y = 3 }
-                { X = 3; Y = 1 }
-                { X = 3; Y = 2 }
-                { X = 3; Y = 3 }
-                { X = 4; Y = 1 }
-                { X = 4; Y = 2 }
-                { X = 4; Y = 3 }
-                { X = 5; Y = 2 } ]
-          set [ { X = 5; Y = 4 }
-                { X = 6; Y = 3 }
-                { X = 6; Y = 4 }
-                { X = 7; Y = 2 }
-                { X = 7; Y = 3 }
-                { X = 7; Y = 4 }
-                { X = 8; Y = 3 }
-                { X = 8; Y = 4 }
-                { X = 9; Y = 4 } ] ] },
+        [ set [ Position(0,0)
+                Position(0,1)
+                Position(1,0) ]
+          set [ Position(5,0)
+                Position(6,0)
+                Position(6,1)
+                Position(7,0)
+                Position(8,0)
+                Position(8,1)
+                Position(9,0)
+                Position(9,1)
+                Position(9,2) ]
+          set [ Position(0,3)
+                Position(1,2)
+                Position(1,3)
+                Position(1,4)
+                Position(2,1)
+                Position(2,2)
+                Position(2,3)
+                Position(3,1)
+                Position(3,2)
+                Position(3,3)
+                Position(4,1)
+                Position(4,2)
+                Position(4,3)
+                Position(5,2) ]
+          set [ Position(5,4)
+                Position(6,3)
+                Position(6,4)
+                Position(7,2)
+                Position(7,3)
+                Position(7,4)
+                Position(8,3)
+                Position(8,4)
+                Position(9,4) ] ] },
     heightMap
   )
 

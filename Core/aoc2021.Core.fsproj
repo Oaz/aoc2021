@@ -11,6 +11,7 @@
         <Compile Include="Tools.fs" />
         <Compile Include="Stack.fs" />
         <Compile Include="Graph.fs" />
+        <Compile Include="Geom2D.fs" />
         <Compile Include="D01.fs" />
         <Compile Include="D01T.fs" />
         <Compile Include="D02.fs" />
@@ -35,6 +36,8 @@
         <Compile Include="D11T.fs" />
         <Compile Include="D12.fs" />
         <Compile Include="D12T.fs" />
+        <Compile Include="D13.fs" />
+        <Compile Include="D13T.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 

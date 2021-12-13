@@ -2,12 +2,9 @@ module aoc2021.Core.D05
 
 open System
 open Tools
+open Geom2D
 
-type Point =
-  { X : int
-    Y : int }
-  static member ReadFrom (s:string) : Point =
-    let ns = splitOnComma s |> List.map Int32.Parse in { X = ns.Head; Y = ns.Tail.Head }
+type Point = Coords
 
 type Line =
   { P1 : Point
@@ -19,17 +16,17 @@ type Line =
 
 let allHVPoints (line:Line) : Point list =
   if line.P1.X = line.P2.X then
-    List.map (fun y -> {X=line.P1.X; Y=y}) (line.Ys())
+    List.map (fun y -> Point(line.P1.X,y)) (line.Ys())
   else
     if line.P1.Y = line.P2.Y then
-      List.map (fun x -> {X=x; Y=line.P1.Y}) (line.Xs())
+      List.map (fun x -> Point(x,line.P1.Y)) (line.Xs())
     else
       List.empty
 
 let allPoints (line:Line) : Point list =
   let hvPoints = allHVPoints line
   if hvPoints.Length = 0 then
-    List.zip (line.Xs()) (line.Ys()) |> List.map (fun (x,y) -> {X=x; Y=y})
+    List.zip (line.Xs()) (line.Ys()) |> List.map Point
   else
     hvPoints
 

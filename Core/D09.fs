@@ -1,19 +1,10 @@
 module aoc2021.Core.D09
 
 open Tools
+open Geom2D
 
-type Position =
-  { X: int
-    Y: int }
-  member this.Adjacents (xLen: int) (yLen: int) : Position list =
-    let inBounds len v : bool = v >= 0 && v < len
-
-    [ (this.X - 1, this.Y)
-      (this.X + 1, this.Y)
-      (this.X, this.Y - 1)
-      (this.X, this.Y + 1) ]
-    |> List.where (fun (x, y) -> (inBounds xLen x) && (inBounds yLen y))
-    |> List.map (fun (x, y) -> { X = x; Y = y })
+type Position = Coords
+let adjacent w h (p:Position) = p.AdjacentCoordsHV |> Zone(Coords(0,0),Coords(w-1,h-1)).Filter
 
 type Basin = Set<Position>
 
@@ -30,10 +21,11 @@ type HeightMap =
     let getHeight (p: Position) : int = Array2D.get heights p.Y p.X
 
     let low y x height : Position option =
-      let p = { X = x; Y = y }
+      let p = Position(x,y)
 
       let isLow =
-        p.Adjacents xSize ySize
+        adjacent xSize ySize p
+        |> Zone(Coords(0,0),Coords(xSize-1,ySize-1)).Filter
         |> List.map (fun (q: Position) -> getHeight q)
         |> List.forall (fun h -> h > height)
 
@@ -46,7 +38,7 @@ type HeightMap =
 
     let growBasin (b: Basin) : Basin =
       let adjacentPositions =
-        Seq.collect (fun (p: Position) -> p.Adjacents xSize ySize) b
+        Seq.collect (adjacent xSize ySize) b
         |> Seq.filter (fun (p: Position) -> (getHeight p) < 9)
         |> Set.ofSeq
 

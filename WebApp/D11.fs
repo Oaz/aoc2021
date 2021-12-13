@@ -105,7 +105,7 @@ type MakeComponent<'globalModel, 'globalMessage>
           div [ attr.``class`` "imgArray" ] [
             for y in [ 0 .. 9 ] do
                 for x in [ 0 .. 9 ] do
-                  let octopus = frame.Cavern.Item { X = x; Y = y }
+                  let octopus = frame.Cavern.Item (Position(x,y))
                   img [ attr.src $"/assets/octopus{octopus.Level}.png" ]
           ]
         ]

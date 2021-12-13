@@ -1,16 +1,10 @@
 module aoc2021.Core.D11
 
 open Tools
+open Geom2D
 
-type Position =
-  { X: int
-    Y: int }
-  member this.Adjacents: Position list =
-    let inBounds v : bool = v >= 0 && v < 10
-    List.allPairs [-1;0;1] [-1;0;1]
-    |> List.except [(0,0)]
-    |> List.map (fun (x,y) -> { X = this.X + x; Y = this.Y + y })
-    |> List.where (fun p -> (inBounds p.X) && (inBounds p.Y))
+type Position = Coords
+let adjacent (p:Position) = p.AdjacentCoordsHVD |> Zone(Coords(0,0),Coords(9,9)).Filter
 
 type Octopus =
   { Level: int }
@@ -21,7 +15,7 @@ type Octopus =
 type Cavern = Map<Position, Octopus>
 let readCavernFrom (ss: string list) : Cavern =
   let makeOctopus y x c : Position * Octopus =
-    ({ X = x; Y = y }, { Level = int c - int '0' })
+    (Position(x,y), { Level = int c - int '0' })
   let readLine (y: int) (s: string) : (Position * Octopus) seq = Seq.mapi (makeOctopus y) s
   Seq.mapi readLine ss
   |> Seq.collect id
@@ -51,7 +45,7 @@ let firstIncreaseEnergyLevel (frame: Frame) : Frame =
   let newCavern = Map.map (fun _ (o: Octopus) -> o.Increase) frame.Cavern
   newFrame frame newCavern (flashingIn newCavern)
 let propagateFlashes (frame: Frame) : Frame = 
-  let targets = List.collect (fun (p:Position) -> p.Adjacents) frame.NewFlashes
+  let targets = List.collect adjacent frame.NewFlashes
   let increaseExceptIfAlreadyFlashing (c: Cavern) (p: Position) = c.Add(p, (c.Item p).IncreaseIfNotFlashing)
   let newCavern = List.fold increaseExceptIfAlreadyFlashing frame.Cavern targets
   newFrame frame newCavern (List.except (flashingIn frame.Cavern) (flashingIn newCavern))

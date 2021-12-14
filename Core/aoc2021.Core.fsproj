@@ -8,10 +8,12 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Content Include="skeleton.sh" />
         <Compile Include="Tools.fs" />
         <Compile Include="Stack.fs" />
         <Compile Include="Graph.fs" />
         <Compile Include="Geom2D.fs" />
+        <Compile Include="Counters.fs" />
         <Compile Include="D01.fs" />
         <Compile Include="D01T.fs" />
         <Compile Include="D02.fs" />
@@ -38,6 +40,8 @@
         <Compile Include="D12T.fs" />
         <Compile Include="D13.fs" />
         <Compile Include="D13T.fs" />
+        <Compile Include="D14.fs" />
+        <Compile Include="D14T.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 

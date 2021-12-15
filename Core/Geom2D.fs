@@ -8,6 +8,7 @@ type Coords(x: int, y :int) =
     let ns = splitOnComma input |> List.map Int32.Parse in Coords(ns.Head,ns.Tail.Head)
   static member (+) (c1 : Coords, c2: Coords) : Coords = Coords(c1.X + c2.X, c1.Y + c2.Y)
   static member (-) (c1 : Coords, c2: Coords) : Coords = Coords(c1.X - c2.X, c1.Y - c2.Y)
+  static member (*) (k : int, c: Coords) : Coords = Coords(k*c.X, k*c.Y)
   static member op_Equality (c1 : Coords, c2: Coords) : bool = c1.Equals(c2)
   member this.X = x
   member this.Y = y
@@ -25,6 +26,7 @@ type Coords(x: int, y :int) =
     |> List.except [(0,0)]
     |> List.map Coords
     |> this.Neighbours
+  override this.ToString() : string = $"({x},{y})"
   override this.Equals(obj:obj) : bool =
     match obj with
     | :? Coords as other -> this.µ=other.µ
@@ -40,6 +42,15 @@ type Coords(x: int, y :int) =
       | _ -> failwith $"Cannot compare {this} and {obj}"
 
 type Zone(topLeft : Coords, bottomRight : Coords) =
+  let size = bottomRight - topLeft + Coords(1,1)
+  member this.TopLeft : Coords = topLeft
+  member this.BottomRight : Coords = bottomRight
+  member this.Size : Coords = size
+  member this.AllCoords : seq<Coords> = seq {
+    for y in [topLeft.Y..bottomRight.Y] do
+      for x in [topLeft.X..bottomRight.X] do
+        yield Coords(x,y)
+  }
   member this.InBounds (c:Coords): bool = c.IsGreaterThan topLeft && c.IsSmallerThan bottomRight
   member this.Filter (cs:Coords list) : Coords list = List.filter this.InBounds cs
   member this.Print (cs:Coords list) : unit =
@@ -49,3 +60,14 @@ type Zone(topLeft : Coords, bottomRight : Coords) =
         | Some _ -> printf "█"
         | None -> printf " "
       printfn ""
+
+let readZone (input:string list) (row : string -> seq<'A>) : Zone*Map<Coords,'A> =
+  let xMax = input.Head.Length - 1
+  let yMax = input.Length - 1
+  let points = [
+    for y in [0..yMax] do
+      let rowItems = row input[y]
+      for x in [0..xMax] do
+        yield (Coords(x,y),Seq.item x rowItems)
+  ]
+  Zone(Coords(0,0),Coords(xMax, yMax)), Map.ofList points

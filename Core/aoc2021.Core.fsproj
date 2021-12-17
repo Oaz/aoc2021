@@ -46,6 +46,8 @@
         <Compile Include="D15T.fs" />
         <Compile Include="D16.fs" />
         <Compile Include="D16T.fs" />
+        <Compile Include="D17.fs" />
+        <Compile Include="D17T.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 

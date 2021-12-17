@@ -26,6 +26,6 @@ let nextDay (population:Population) : Population =
   Map.fold (fun pop kind count -> (addToMultipleKindOfFish count) pop (nextFishDay kind) ) (Population []) population
 
 let fastForward (days:int) (population:Population) : Population =
-  generate nextDay population |> Seq.skip (days-1) |> Seq.head
+  iterate nextDay population |> Seq.skip (days-1) |> Seq.head
 
 let countFish (population:Population) : int64 = Seq.sum population.Values

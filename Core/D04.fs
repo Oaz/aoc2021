@@ -44,7 +44,7 @@ type Game =
       NextDrawn = gm.NextDrawn.Tail;
       Grids = gm.Grids |> List.map (fun g -> g.Mark(gm.NextDrawn.Head))
     }
-    generate drawNextNumber this
+    iterate drawNextNumber this
   member this.ToFirstWinningGrid () : Game*int =
     let winningGrid (gm:Game) : int option = List.tryFindIndex (fun g -> g.Bingo) gm.Grids
     this.Play() |> Seq.map (addOption winningGrid) |> Seq.choose id |> Seq.head

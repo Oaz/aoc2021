@@ -45,8 +45,8 @@ type HeightMap =
       b + adjacentPositions
 
     let findBasin (lp: Position) : Basin =
-      generate growBasin (set [ lp ])
-      |> rollUntil (fun (b1, b2) -> b1 = b2)
+      iterate growBasin (set [ lp ])
+      |> rollUntilPairwise (fun (b1, b2) -> b1 = b2)
 
     { Heights = heights
       LowPoints = lowPoints

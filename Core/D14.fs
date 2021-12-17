@@ -35,7 +35,7 @@ let step (rules:Rules) (polymer:Polymer) : Polymer =
     polymer with Pairs = Map.fold findOperation Map.empty polymer.Pairs |> Map.fold (addToCKA 0L) polymer.Pairs
   }
 
-let multiStep (n:int) (rules:Rules) (polymer:Polymer) : Polymer = generate (step rules) polymer |> Seq.item (n-1)
+let multiStep (n:int) (rules:Rules) (polymer:Polymer) : Polymer = iterate (step rules) polymer |> Seq.item (n-1)
 
 let polymerLength (polymer:Polymer) : Int64 = 1L+(polymer.Pairs |> Map.values |> Seq.sum)
 

@@ -21,8 +21,8 @@ let inputForDay (day: int) : string =
   use httpClient = new HttpClient(handler)
 
   handler.CookieContainer.Add(
-    new Uri("https://adventofcode.com"),
-    new Cookie("session", Environment.GetEnvironmentVariable("SESSION"))
+    Uri("https://adventofcode.com"),
+    Cookie("session", Environment.GetEnvironmentVariable("SESSION"))
   )
 
   getAsync httpClient $"https://adventofcode.com/2021/day/{day}/input"
@@ -35,8 +35,9 @@ let splitOnChar (sep:char) (input: string) : string list =
 let splitLines = splitOnChar '\n'
 let splitOnComma = splitOnChar ','
 
-let generate (f:'a -> 'a) : 'a -> 'a seq = Seq.unfold (fun x -> let y = f x in Some (y,y))
-let rollUntil (f:'a*'a -> bool) : 'a seq -> 'a = fst << Seq.head << Seq.skipWhile (f >> not) << Seq.pairwise
+let iterate (f:'a -> 'a) : 'a -> 'a seq = Seq.unfold (fun x -> let y = f x in Some (y,y))
+let rollUntil (f:'a -> bool) : 'a seq -> 'a = Seq.head << Seq.skipWhile (f >> not)
+let rollUntilPairwise (f:'a*'a -> bool) : 'a seq -> 'a = fst << Seq.head << Seq.skipWhile (f >> not) << Seq.pairwise
 let addOption (f: 'a -> 'b option) (t:'a) : ('a*'b) option = Option.bind (fun x -> Some (t,x)) (f t)
 let flip f a b = f b a
 let charToInt (c:char) = int c - int '0'

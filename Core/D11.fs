@@ -51,14 +51,14 @@ let propagateFlashes (frame: Frame) : Frame =
   newFrame frame newCavern (List.except (flashingIn frame.Cavern) (flashingIn newCavern))
 let nextFrame (frame: Frame) : Frame =
   firstIncreaseEnergyLevel frame
-  |> generate propagateFlashes
+  |> iterate propagateFlashes
   |> Seq.skipWhile (fun s -> s.NewFlashes.Length > 0)
   |> Seq.head
 
 let fastForward (n: int) (cavern: Cavern) : Frame =
   cavern
   |> initialFrame
-  |> generate nextFrame
+  |> iterate nextFrame
   |> Seq.skip (n - 1)
   |> Seq.head
 

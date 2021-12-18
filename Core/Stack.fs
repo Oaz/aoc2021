@@ -40,3 +40,9 @@ type Stack<'t> =
   member this.ToList : 't list = this.Fold (fun l b -> b :: l) [] |> List.rev
 
   member this.TopN (n:int) : 't list = this.ToList |> List.take n
+
+let top (s:Stack<'t>) = s.Top
+let top2 (s:Stack<'t>) = s.Top2
+let push (x:'t) (s:Stack<'t>) = s.Push x
+let popn (n:int) (s:Stack<'t>) = s.PopN n
+

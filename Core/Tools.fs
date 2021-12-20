@@ -35,9 +35,17 @@ let splitOnChar (sep:char) (input: string) : string list =
 let splitLines = splitOnChar '\n'
 let splitOnComma = splitOnChar ','
 
+let splitOnHeader (h:'t -> bool) (xs:'t list) : 't list list =
+  let scanner (s:'t list list) (t:'t) : 't list list =
+    if h t then [t]::s else (s.Head@[t])::s.Tail
+  Seq.fold scanner List.empty xs |> List.rev
+
 let iterate (f:'a -> 'a) : 'a -> 'a seq = Seq.unfold (fun x -> let y = f x in Some (y,y))
 let rollUntil (f:'a -> bool) : 'a seq -> 'a = Seq.head << Seq.skipWhile (f >> not)
 let rollUntilPairwise (f:'a*'a -> bool) : 'a seq -> 'a = fst << Seq.head << Seq.skipWhile (f >> not) << Seq.pairwise
 let addOption (f: 'a -> 'b option) (t:'a) : ('a*'b) option = Option.bind (fun x -> Some (t,x)) (f t)
 let flip f a b = f b a
 let charToInt (c:char) = int c - int '0'
+let fst3 (a, _, _) = a
+let snd3 (_, b, _) = b
+let thd3 (_, _, c) = c

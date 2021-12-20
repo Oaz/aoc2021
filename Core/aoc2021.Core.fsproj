@@ -51,10 +51,13 @@
         <Compile Include="D17T.fs" />
         <Compile Include="D18.fs" />
         <Compile Include="D18T.fs" />
+        <Compile Include="D19.fs" />
+        <Compile Include="D19T.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="FSharp.Stats" Version="0.4.2" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
         <PackageReference Include="NUnit" Version="3.13.2" />
         <PackageReference Include="NUnit3TestAdapter" Version="4.0.0" />

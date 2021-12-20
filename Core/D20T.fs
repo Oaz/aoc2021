@@ -22,12 +22,7 @@ let TestReadImage () =
 
 [<Test>]
 let TestReadAlgorithm () =
-  Assert.AreEqual( Map.ofList [
-    (0, 0)
-    (1, 0)
-    (2, 1)
-    ], readAlgorithm "..#"
-  )
+  Assert.AreEqual( [| 0; 0; 1 |], readAlgorithm "..#" )
 
 let input = [
   "..#.#..#####.#.#.#.###.##.....###.##.#..###.####..#####..#....#..#..##..###..######.###...####..#..#####..##..#.#####...##.#.#..#.##..#.#......#.###.######.###.####...#.##.##..#..#..#####.....#.#....###..#.##......#.....#..#..#..##..#...##.######.####.####.#.#...#.......#..#.#.#...####.##.#......#..#...##.#.##..#...##.#.##..###.#......#.#.......#.#.#.####.###.##...#.....####.#..#..#.##.#....##..#.####....##...##..#...#......#.#.......#.......##..####..#...#.#.#...##..#.#..###..#####........#..####......#..#"
@@ -42,7 +37,7 @@ let input = [
 [<Test>]
 let TestExample () =
   let algorithm,image0 = readInstructions input
-  Assert.AreEqual( 512, algorithm.Count )
+  Assert.AreEqual( 512, algorithm.Length )
   Assert.AreEqual( 5, Array2D.length1 image0.center )
   Assert.AreEqual( 5, Array2D.length2 image0.center )
   
@@ -80,5 +75,6 @@ let TestParts () =
   let algorithm,image0 = inputForDay 20 |> splitLines |> readInstructions
   Assert.AreEqual( 5475, mEnhance 2 algorithm image0 |> litCount )
   Assert.AreEqual( 17548, mEnhance 50 algorithm image0 |> litCount )
+  Assert.AreEqual( 35131, mEnhance 100 algorithm image0 |> litCount )
 
 

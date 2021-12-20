@@ -8,17 +8,20 @@ open Component
 
 /// Routing endpoints definition.
 type Page =
-  | [<EndPoint "/">] D11
+  | [<EndPoint "/">] D20
+  | [<EndPoint "/D11">] D11
  
 /// The Elmish application's model.
 type Model =
   { menu: RoutingMenu.Model<Page>
-    d11: D11.Model }
+    d11: D11.Model
+    d20: D20.Model }
 
 /// The Elmish application's update messages.
 type Message =
   | MenuMessage of RoutingMenu.Message<Page, Model, Message>
   | D11Message of D11.Message
+  | D20Message of D20.Message
 
 /// Connects the routing system to the Elmish application.
 let router: Router<Page, Model, Message> =
@@ -39,6 +42,19 @@ let d11 =
     )
   )
 
+let d20 =
+  D20.MakeComponent<Model, Message>(
+    ModelWrapper((fun gm lm -> { gm with d20 = lm }), (fun m -> m.d20)),
+    MessageWrapper(
+      D20Message,
+      (fun msg ->
+        match msg with
+        | D20Message m -> Some m
+        | _ -> None),
+      messageRouting
+    )
+  )
+
 let menu =
   RoutingMenu.MakeComponent<Model, Message, Page>(
     ModelWrapper((fun gm lm -> { gm with menu = lm }), (fun m -> m.menu)),
@@ -50,22 +66,26 @@ let menu =
         | _ -> None),
       messageRouting
     ),
-    D11,
-    [ (D11, "Day 11", router.HRef D11, [ d11.µ ]) ]
+    D20,
+    [ (D11, "Day 11", router.HRef D11, [ d11.µ ])
+      (D20, "Day 20", router.HRef D20, [ d20.µ ]) ]
   )
 
 let initModel =
   { menu = menu.InitialModel
-    d11 = d11.InitialModel }
+    d11 = d11.InitialModel
+    d20 = d20.InitialModel }
 
 let update (message: Message) : Services -> Message -> Model -> Model * Cmd<Message> =
   match message with
   | MenuMessage _ -> menu.Update
   | D11Message _ -> d11.Update
+  | D20Message _ -> d20.Update
 
 let components =
   [ menu.µ
-    d11.µ ]
+    d11.µ
+    d20.µ ]
 
 type MyApp() =
   inherit ProgramComponent<Model, Message>()

@@ -15,8 +15,8 @@ let readImage (input:string list) : Image =
       image[y,x] <- charToPixel pixel
   { center=image; others=0 }
 
-type Algorithm = Map<int,Pixel>
-let readAlgorithm (input:string) : Algorithm = Seq.mapi (fun i c -> (i,charToPixel c)) input |> Map.ofSeq
+type Algorithm = Pixel[]
+let readAlgorithm (input:string) : Algorithm = Seq.map (fun c -> charToPixel c) input |> Array.ofSeq
 let readInstructions (input:string list) : Algorithm*Image = readAlgorithm input.Head, readImage input.Tail.Tail
 
 let enhance (a:Algorithm) (image:Image) : Image =
@@ -24,12 +24,16 @@ let enhance (a:Algorithm) (image:Image) : Image =
   let height = (Array2D.length1 image.center) + 2
   let biggerImage = Array2D.init<Pixel> (height+2) (width+2) (fun _ _ -> image.others)
   biggerImage[2..(height-1),2..(width-1)] <- image.center
+  let inline pix x y : int = biggerImage[y,x]
+  let inline code x y =
+    (pix x y)*256 + (pix (x+1) y)*128 + (pix (x+2) y)*64
+     + (pix x (y+1))*32 + (pix (x+1) (y+1))*16 + (pix (x+2) (y+1))*8
+     + (pix x (y+2))*4 + (pix (x+1) (y+2))*2 + (pix (x+2) (y+2))*1
   let newImage = Array2D.zeroCreate<Pixel> height width
-  let code x y = biggerImage[y..(y+2),x..(x+2)] |> Seq.cast<Pixel> |> Seq.fold (fun n b -> (n <<< 1)+b) 0
   for y in [0..(height-1)] do
     for x in [0..(width-1)] do
       newImage[y,x] <- a[code x y]
-  { center=newImage; others=a[image.others*(a.Count-1)] }
-
+  { center=newImage; others=a[image.others*(a.Length-1)] }
+  
 let mEnhance (n:int) (a:Algorithm) (image:Image) = List.fold (fun x _ -> enhance a x) image [1..n]
 let litCount (image:Image) : int = Seq.cast<Pixel> image.center |> Seq.sum

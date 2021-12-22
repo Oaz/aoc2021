@@ -15,3 +15,4 @@ let optionOfSnd f (x, y) =
     match f y with
     | Some y' -> Some (x, y')
     | None    -> None
+let combine f g (a,b) (c,d) = (f a c, g b d)
